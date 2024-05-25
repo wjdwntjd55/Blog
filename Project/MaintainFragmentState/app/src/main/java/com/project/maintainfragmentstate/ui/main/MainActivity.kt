@@ -1,11 +1,14 @@
-package com.project.maintainfragmentstate
+package com.project.maintainfragmentstate.ui.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import com.project.maintainfragmentstate.R
 import com.project.maintainfragmentstate.databinding.ActivityMainBinding
+import com.project.maintainfragmentstate.ui.one.OneFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,5 +27,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bottomNavigationMain.setOnApplyWindowInsetsListener(null)
+        replaceFragment(ONE_FRAGMENT)
     }
+
+    fun replaceFragment(name: String) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+
+        val newFragment: Fragment = when(name) {
+            ONE_FRAGMENT -> OneFragment()
+
+            else -> Fragment()
+        }
+
+        fragmentTransaction.replace(R.id.fragment_container_main, newFragment)
+        fragmentTransaction.commit()
+    }
+
+    companion object {
+
+        const val ONE_FRAGMENT = "OneFragment"
+    }
+
 }
