@@ -21,8 +21,9 @@
         android:background="#FFEB3B"
         app:itemActiveIndicatorStyle="@android:color/transparent"
         app:itemIconSize="32dp"
-        app:itemIconTint="#3F51B5"
+        app:itemIconTint="@drawable/select_bottom_navigation"
         app:itemRippleColor="@null"
+        app:itemTextColor="@drawable/select_bottom_navigation"
         app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
