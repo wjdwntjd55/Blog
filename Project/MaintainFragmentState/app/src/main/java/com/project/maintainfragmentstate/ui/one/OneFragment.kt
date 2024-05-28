@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.maintainfragmentstate.R
 import com.project.maintainfragmentstate.databinding.FragmentOneBinding
 import com.project.maintainfragmentstate.ui.main.MainActivity
+import com.project.maintainfragmentstate.ui.main.MainViewModel
 
 class OneFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var binding: FragmentOneBinding
 
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var viewModel: OneViewModel
 
     val TAG = "OneFragment"
@@ -29,6 +31,8 @@ class OneFragment : Fragment() {
         mainActivity = activity as MainActivity
         binding = FragmentOneBinding.inflate(layoutInflater)
 
+        // MainViewModel을 Activity 범위에서 가져오기
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         viewModel = ViewModelProvider(this)[OneViewModel::class.java]
         viewModel.getAllData()
 
@@ -38,6 +42,13 @@ class OneFragment : Fragment() {
     }
 
     private fun observeData() {
+
+        mainViewModel.oneState.observe(viewLifecycleOwner) { state ->
+            if (state) {
+                binding.recyclerViewOne.smoothScrollToPosition(0)
+            }
+        }
+
         viewModel.result.observe(viewLifecycleOwner) { dataList ->
             Log.d(TAG, "it : $dataList")
 

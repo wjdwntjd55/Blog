@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.project.maintainfragmentstate.R
 import com.project.maintainfragmentstate.databinding.ActivityMainBinding
 import com.project.maintainfragmentstate.ui.one.OneFragment
@@ -15,6 +16,12 @@ import com.project.maintainfragmentstate.ui.two.TwoFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
+
+    private var oneState = true
+
+    val TAG = "aaaaa"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,6 +34,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         binding.bottomNavigationMain.setOnApplyWindowInsetsListener(null)
         addFragment(ONE_FRAGMENT)
@@ -67,12 +76,20 @@ class MainActivity : AppCompatActivity() {
 
                 when(it.itemId) {
                     R.id.item_one_menu -> {
-                        addFragment(ONE_FRAGMENT)
+                        if (oneState) {
+                            viewModel.upOneFragment()
+                        } else {
+                            addFragment(ONE_FRAGMENT)
+                        }
+
+                        oneState = true
+                        
                         return@setOnItemSelectedListener true
                     }
 
                     R.id.item_two_menu -> {
                         addFragment(TWO_FRAGMENT)
+                        oneState = false
                         return@setOnItemSelectedListener true
                     }
 
