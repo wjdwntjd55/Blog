@@ -37,6 +37,7 @@ class OneFragment : Fragment() {
         viewModel.getAllData()
 
         observeData()
+        swipeRefresh()
 
         return binding.root
     }
@@ -57,6 +58,14 @@ class OneFragment : Fragment() {
                 layoutManager = LinearLayoutManager(requireContext())
             }
 
+        }
+    }
+
+    private fun swipeRefresh() {
+        binding.swipeRefreshLayoutOne.setOnRefreshListener {
+            viewModel.getAllData()
+            // 새로고침 아이콘 없애기
+            binding.swipeRefreshLayoutOne.isRefreshing = false
         }
     }
 
