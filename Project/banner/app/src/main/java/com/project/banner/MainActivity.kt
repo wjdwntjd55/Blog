@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.project.banner.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +39,17 @@ class MainActivity : AppCompatActivity() {
             // (Int.MAX_VALUE / 2 % dataList.size)는 이 중간 지점을 데이터 리스트의 크기로 나눈 나머지를 구해서, 초기 위치가 데이터 리스트의 첫 번째 항목에 정확히 맞도록 조정한다
             val initialPosition = Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2 % dataList.size)
             setCurrentItem(initialPosition, false)
+
+            // 초기값 설정
+            binding.textViewCurrentBannerMain.text = "${initialPosition % dataList.size + 1} / ${dataList.size}"
         }
+
+        binding.viewPager2Main.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.textViewCurrentBannerMain.text = "${position % dataList.size + 1} / ${dataList.size}"
+            }
+        })
 
     }
 }
