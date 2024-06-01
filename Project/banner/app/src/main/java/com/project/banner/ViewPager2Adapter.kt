@@ -19,12 +19,15 @@ class ViewPager2Adapter(private val dataList: ArrayList<DataPage>): RecyclerView
         return ViewPager2ViewHolder(ItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
+    // 무한 스크롤을 위해 매우 큰 카운트 값을 사용
     override fun getItemCount(): Int {
-        return dataList.size
+        return Int.MAX_VALUE
     }
 
     override fun onBindViewHolder(holder: ViewPager2ViewHolder, position: Int) {
-        holder.bind(dataList[position])
+        // 실제 데이터 위치를 계산
+        val realPosition = position % dataList.size
+        holder.bind(dataList[realPosition])
     }
 
 }

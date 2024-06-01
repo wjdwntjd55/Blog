@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewPager2Main.run {
             adapter = ViewPager2Adapter(dataList)
+            // 초기 위치를 dataList의 크기의 중간 값으로 설정하여 사용자가 양방향으로 스크롤할 수 있도록 한다
+            // (Int.MAX_VALUE / 2 % dataList.size)는 이 중간 지점을 데이터 리스트의 크기로 나눈 나머지를 구해서, 초기 위치가 데이터 리스트의 첫 번째 항목에 정확히 맞도록 조정한다
+            val initialPosition = Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2 % dataList.size)
+            setCurrentItem(initialPosition, false)
         }
 
     }
