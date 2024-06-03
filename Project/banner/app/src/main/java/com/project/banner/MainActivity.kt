@@ -1,6 +1,8 @@
 package com.project.banner
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,6 +13,14 @@ import com.project.banner.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val handler = Handler(Looper.getMainLooper())
+    private val autoScrollRunnable = Runnable {
+        val currentItem = binding.viewPager2Main.currentItem
+        val nextItem = currentItem + 1
+        binding.viewPager2Main.setCurrentItem(nextItem, true)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -49,7 +59,38 @@ class MainActivity : AppCompatActivity() {
                 super.onPageSelected(position)
                 binding.textViewCurrentBannerMain.text = "${position % dataList.size + 1} / ${dataList.size}"
             }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+
+                when (state) {
+
+                    // 스크롤이 멈췄을 때 자동 스크롤 다시 시작
+                    ViewPager2.SCROLL_STATE_IDLE -> {
+                        handler.postDelayed(autoScrollRunnable, 2000)
+                    }
+
+                    // 사용자가 드래그하기 시작했을 때 자동 스크롤 중지
+                    ViewPager2.SCROLL_STATE_DRAGGING -> {
+                        handler.removeCallbacks(autoScrollRunnable)
+                    }
+
+                    // 스크롤이 양쪽 끝까지 갔을 때
+                    ViewPager2.SCROLL_STATE_SETTLING -> {}
+                }
+
+            }
         })
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handler.postDelayed(autoScrollRunnable, 2000)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(autoScrollRunnable)
     }
 }
