@@ -5,13 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.fragmentanimation.databinding.ItemOneBinding
 
-class OneAdapter(private val dataList: List<MainData>) : RecyclerView.Adapter<OneAdapter.OneViewHolder>() {
+class OneAdapter(
+    private val dataList: List<MainData>,
+    private val onItemClick: (MainData) -> Unit
+) : RecyclerView.Adapter<OneAdapter.OneViewHolder>() {
 
     inner class OneViewHolder(private val binding: ItemOneBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: MainData) {
             binding.imageViewItemOne.setImageResource(item.imageResId)
             binding.textViewItemOne.text = item.name
+
+            binding.root.setOnClickListener {
+                onItemClick(item)
+            }
+
         }
 
     }

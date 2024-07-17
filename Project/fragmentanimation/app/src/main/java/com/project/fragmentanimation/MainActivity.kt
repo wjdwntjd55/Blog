@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.project.fragmentanimation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,10 +25,10 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        addFragment(ONE_FRAGMENT)
+        addFragment(ONE_FRAGMENT, false, null)
     }
 
-    fun addFragment(name: String) {
+    fun addFragment(name: String, addToBackStack: Boolean, bundle: Bundle?) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
         // 현재 추가된 모든 프래그먼트를 숨깁니다.
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         if (newFragment == null) {
             newFragment = when(name) {
                 ONE_FRAGMENT -> OneFragment()
+                TWO_FRAGMENT -> TwoFragment()
                 else -> Fragment()
             }
             // 새 프래그먼트를 추가합니다. 태그를 사용하여 찾을 수 있도록 합니다.
@@ -51,10 +53,21 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.show(newFragment)
         }
 
+        newFragment.arguments = bundle
+
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(name)
+        }
+
         fragmentTransaction.commit()
+    }
+
+    fun removeFragment(name: String) {
+        supportFragmentManager.popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
     companion object {
         const val ONE_FRAGMENT = "OneFragment"
+        const val TWO_FRAGMENT = "TwoFragment"
     }
 }

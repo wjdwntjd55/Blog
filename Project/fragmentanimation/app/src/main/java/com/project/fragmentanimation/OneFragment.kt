@@ -23,7 +23,13 @@ class OneFragment : Fragment() {
 
         binding.recyclerViewOne.run {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = OneAdapter(mainDataList)
+            adapter = OneAdapter(mainDataList) { data ->
+                val bundle = Bundle().apply {
+                    putInt("imageResId", data.imageResId)
+                    putString("name", data.name)
+                }
+                mainActivity.addFragment(MainActivity.TWO_FRAGMENT, true, bundle)
+            }
         }
 
         return binding.root
