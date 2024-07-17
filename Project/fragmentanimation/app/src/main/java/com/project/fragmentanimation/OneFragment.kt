@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.fragmentanimation.databinding.FragmentOneBinding
 
 class OneFragment : Fragment() {
@@ -19,6 +20,11 @@ class OneFragment : Fragment() {
 
         mainActivity = activity as MainActivity
         binding = FragmentOneBinding.inflate(layoutInflater)
+
+        binding.recyclerViewOne.run {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = OneAdapter(mainDataList)
+        }
 
         return binding.root
     }
