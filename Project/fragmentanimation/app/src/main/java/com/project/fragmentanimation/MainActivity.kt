@@ -31,6 +31,14 @@ class MainActivity : AppCompatActivity() {
     fun addFragment(name: String, addToBackStack: Boolean, bundle: Bundle?) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
+        // 애니메이션 설정
+        fragmentTransaction.setCustomAnimations(
+            R.anim.slide_in,
+            R.anim.fade_out,
+            R.anim.fade_in,
+            R.anim.slide_out
+        )
+
         // 현재 추가된 모든 프래그먼트를 숨깁니다.
         val currentFragments = supportFragmentManager.fragments
         for (fragment in currentFragments) {
