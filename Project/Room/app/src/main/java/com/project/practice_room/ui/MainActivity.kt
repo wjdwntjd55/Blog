@@ -1,6 +1,7 @@
 package com.project.practice_room.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.practice_room.R
+import com.project.practice_room.app.MyApplication
+import com.project.practice_room.data.repository.MainRepository
 import com.project.practice_room.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MainAdapter
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels {
+        MainViewModelFactory(MainRepository((application as MyApplication).database.plantDao()))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +53,10 @@ class MainActivity : AppCompatActivity() {
             if (result.isSuccessful) {
                 result.body()?.let { plants ->
                     adapter.updateData(plants)
+                    Log.d("MainActivity1", "Plants fetched: $plants")
                 }
+            } else {
+                Log.d("MainActivity1", "Error fetching data: ${result.message()}")
             }
         }
     }

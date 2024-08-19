@@ -10,9 +10,7 @@ import com.project.practice_room.data.repository.MainRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
-
-    private val mainRepository = MainRepository()
+class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
     private val _allPlants = MutableLiveData<Response<List<Plant>>>()
     val allPlants: LiveData<Response<List<Plant>>> get() = _allPlants
@@ -25,13 +23,21 @@ class MainViewModel : ViewModel() {
                 Log.d("MainViewModel", "getAllData response.body(): ${response.body()}")
 
                 if (response.isSuccessful) {
+                    response.body()?.let { plants ->
+                        // Room에 데이터 삽입
+                        mainRepository.insertPlants(plants)
+                    }
                     _allPlants.postValue(response)
                 } else {
                     Log.e("MainViewModel", "Error: ${response.message()}")
+                    val plantsFromDb = mainRepository.getPlantsFromDatabase()
+                    _allPlants.postValue(Response.success(plantsFromDb))
                 }
 
             } catch (e: Exception) {
                 Log.e("MainViewModel", "Error fetching data: ${e.message}", e)
+                val plantsFromDb = mainRepository.getPlantsFromDatabase()
+                _allPlants.postValue(Response.success(plantsFromDb))
             }
         }
     }
