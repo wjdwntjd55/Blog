@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickListener {
                 mainAdapter.submitList(emptyList())
                 binding.textViewDeleteAll.visibility = View.GONE
                 binding.textViewEmpty.visibility = View.VISIBLE
+                binding.recyclerViewMain.visibility = View.GONE
             } else {
                 Log.d("aaaaa", "searches: $searches")
                 mainAdapter.submitList(searches) {
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickListener {
                 }
                 binding.textViewDeleteAll.visibility = View.VISIBLE
                 binding.textViewEmpty.visibility = View.GONE
+                binding.recyclerViewMain.visibility = View.VISIBLE
             }
         }
 
