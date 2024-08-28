@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerViewMain.apply {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            // 애니메이션 제거
+            itemAnimator = null
         }
         mainViewModel.getAllSearches()
     }
