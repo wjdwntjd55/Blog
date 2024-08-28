@@ -1,17 +1,18 @@
-package com.project.room_search
+package com.project.room_search.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.project.room_search.data.local.entities.Search
 import com.project.room_search.databinding.ItemSearchBinding
 
-class MainAdapter : ListAdapter<String, MainAdapter.MainViewHolder>(diffUtil) {
+class MainAdapter : ListAdapter<Search, MainAdapter.MainViewHolder>(diffUtil) {
 
     inner class MainViewHolder(private val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: String) {
-            binding.textViewSearchItem.text = item
+        fun bind(item: Search) {
+            binding.textViewSearchItem.text = item.contents
         }
 
     }
@@ -27,12 +28,12 @@ class MainAdapter : ListAdapter<String, MainAdapter.MainViewHolder>(diffUtil) {
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-                return oldItem == newItem
+        val diffUtil = object : DiffUtil.ItemCallback<Search>() {
+            override fun areItemsTheSame(oldItem: Search, newItem: Search): Boolean {
+                return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            override fun areContentsTheSame(oldItem: Search, newItem: Search): Boolean {
                 return oldItem == newItem
             }
 
