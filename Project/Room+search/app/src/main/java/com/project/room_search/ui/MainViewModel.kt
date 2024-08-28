@@ -20,7 +20,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
             // 현재 검색어 목록 가져오기
             val currentSearches = _allSearches.value ?: emptyList()
             // 새 검색어 추가
-            _allSearches.postValue(currentSearches + search)
+            _allSearches.postValue(listOf(search) + currentSearches)
         }
     }
 

@@ -48,7 +48,10 @@ class MainActivity : AppCompatActivity() {
                 Log.d("aaaaa", "검색 이력이 없습니다.")
             } else {
                 Log.d("aaaaa", "searches: $searches")
-                mainAdapter.submitList(searches)
+                mainAdapter.submitList(searches) {
+                    // 새로 추가된 데이터를 기준으로 스크롤
+                    binding.recyclerViewMain.scrollToPosition(0)
+                }
             }
         }
 

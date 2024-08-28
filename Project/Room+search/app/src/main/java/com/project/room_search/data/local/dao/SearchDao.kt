@@ -16,7 +16,7 @@ interface SearchDao {
     @Delete
     suspend fun deleteSearch(search: Search)
 
-    @Query("SELECT * FROM search")
+    @Query("SELECT * FROM search ORDER BY id DESC")
     suspend fun getAllSearches(): List<Search>
 
     @Query("DELETE FROM search")
