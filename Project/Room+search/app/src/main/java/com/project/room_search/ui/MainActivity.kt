@@ -12,10 +12,10 @@ import com.project.room_search.data.repository.MainRepository
 import com.project.room_search.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private val mainAdapter = MainAdapter()
+    private val mainAdapter = MainAdapter(this)
 
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModelFactory(MainRepository((application as MyApplication).database.searchDao()))
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             if (searches.isEmpty()) {
                 // 검색어가 없을 때의 처리
                 Log.d("aaaaa", "검색 이력이 없습니다.")
+                mainAdapter.submitList(emptyList())
             } else {
                 Log.d("aaaaa", "searches: $searches")
                 mainAdapter.submitList(searches) {
@@ -74,5 +75,9 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
+    }
+
+    override fun removeItemClick(item: Search) {
+        mainViewModel.deleteSearch(item)
     }
 }

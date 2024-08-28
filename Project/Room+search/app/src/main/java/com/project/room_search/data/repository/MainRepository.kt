@@ -5,8 +5,8 @@ import com.project.room_search.data.local.entities.Search
 
 class MainRepository(private val searchDao: SearchDao) {
 
-    suspend fun insertSearch(search: Search) {
-        searchDao.insertSearch(search)
+    suspend fun insertSearch(search: Search): Long {
+        return searchDao.insertSearch(search)
     }
 
     suspend fun deleteSearch(search: Search) {

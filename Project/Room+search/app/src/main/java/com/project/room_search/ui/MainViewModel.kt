@@ -15,12 +15,24 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
     fun insertSearch(search: Search) {
         viewModelScope.launch {
-            mainRepository.insertSearch(search)
+            val id = mainRepository.insertSearch(search)
+
+            val newSearch = search.copy(id = id.toInt())
 
             // 현재 검색어 목록 가져오기
             val currentSearches = _allSearches.value ?: emptyList()
             // 새 검색어 추가
-            _allSearches.postValue(listOf(search) + currentSearches)
+            _allSearches.postValue(listOf(newSearch) + currentSearches)
+        }
+    }
+
+    fun deleteSearch(search: Search) {
+        viewModelScope.launch {
+            mainRepository.deleteSearch(search)
+
+            // 현재 검색어 목록에서 삭제
+            val currentSearches = _allSearches.value ?: emptyList()
+            _allSearches.postValue(currentSearches.filter { it.id != search.id })
         }
     }
 

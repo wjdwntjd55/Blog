@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.room_search.data.local.entities.Search
 import com.project.room_search.databinding.ItemSearchBinding
 
-class MainAdapter : ListAdapter<Search, MainAdapter.MainViewHolder>(diffUtil) {
+class MainAdapter(private val itemClickListener: OnItemClickListener) : ListAdapter<Search, MainAdapter.MainViewHolder>(diffUtil) {
 
     inner class MainViewHolder(private val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Search) {
             binding.textViewSearchItem.text = item.contents
+            binding.imageViewSearchItem.setOnClickListener {
+                itemClickListener.removeItemClick(item)
+            }
         }
 
     }
@@ -38,6 +41,10 @@ class MainAdapter : ListAdapter<Search, MainAdapter.MainViewHolder>(diffUtil) {
             }
 
         }
+    }
+
+    interface OnItemClickListener {
+        fun removeItemClick(item: Search)
     }
 
 }

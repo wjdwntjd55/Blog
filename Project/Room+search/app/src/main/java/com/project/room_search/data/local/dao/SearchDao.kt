@@ -11,7 +11,7 @@ import java.util.concurrent.Flow
 @Dao
 interface SearchDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSearch(search: Search)
+    suspend fun insertSearch(search: Search): Long
 
     @Delete
     suspend fun deleteSearch(search: Search)
