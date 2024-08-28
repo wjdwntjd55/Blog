@@ -2,6 +2,7 @@ package com.project.room_search.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickListener {
         init()
         observeData()
         inputSearch()
+        deleteAllSearches()
     }
 
     private fun init() {
@@ -49,12 +51,14 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickListener {
                 // 검색어가 없을 때의 처리
                 Log.d("aaaaa", "검색 이력이 없습니다.")
                 mainAdapter.submitList(emptyList())
+                binding.textViewDeleteAll.visibility = View.GONE
             } else {
                 Log.d("aaaaa", "searches: $searches")
                 mainAdapter.submitList(searches) {
                     // 새로 추가된 데이터를 기준으로 스크롤
                     binding.recyclerViewMain.scrollToPosition(0)
                 }
+                binding.textViewDeleteAll.visibility = View.VISIBLE
             }
         }
 
@@ -74,6 +78,12 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickListener {
             } else {
                 false
             }
+        }
+    }
+
+    private fun deleteAllSearches() {
+        binding.textViewDeleteAll.setOnClickListener {
+            mainViewModel.deleteAllSearches()
         }
     }
 

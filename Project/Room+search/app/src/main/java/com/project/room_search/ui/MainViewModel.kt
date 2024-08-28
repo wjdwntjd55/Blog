@@ -43,4 +43,11 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         }
     }
 
+    fun deleteAllSearches() {
+        viewModelScope.launch {
+            mainRepository.deleteAllSearches()
+            _allSearches.postValue(emptyList())
+        }
+    }
+
 }
