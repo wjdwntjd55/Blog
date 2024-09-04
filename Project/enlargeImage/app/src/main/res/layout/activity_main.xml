@@ -6,11 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <io.getstream.photoview.PhotoView
         android:id="@+id/photo_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PhotoViewDialog" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

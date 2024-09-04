@@ -51,6 +51,7 @@ dependencies {
 
     // PhotoView
     implementation("io.getstream:photoview:1.0.2")
+    implementation("io.getstream:photoview-dialog:1.0.2")
     // glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 }
