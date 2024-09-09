@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:id="@+id/imageView_drag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_drag_handle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="약관에 동의해주세요"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_drag" />
+
+        <TextView
+            android:id="@+id/textView_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="여러분의 개인정보와 서비스 이용 권리를 \n잘 지켜드릴께요"
+            android:textColor="#808080"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_title" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayout_all_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/textView_sub_title">
+
+            <CheckBox
+                style="@style/CustomCheckbox"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="모두 동의"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- 회색 선 추가 -->
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#D3D3D3"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout_age_agree"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_all_agree" />
+
+        <!-- 만 14세 이상 동의 -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayout_age_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <CheckBox
+                style="@style/CustomCheckbox"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="(필수) 만 14세 이상입니다."
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- 서비스 이용약관 동의 -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayout_service_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_age_agree">
+
+            <CheckBox
+                style="@style/CustomCheckbox"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="(필수) 서비스 이용약관 동의"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- 개인정보 처리방침 동의 -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayout_personal_information_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_service_agree">
+
+            <CheckBox
+                style="@style/CustomCheckbox"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="(필수) 개인정보 처리방침 동의"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- 마케팅 수신 동의 -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayout_marketing_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_personal_information_agree">
+
+            <CheckBox
+                style="@style/CustomCheckbox"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="(선택) 마케팅 수신 동의"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <Button
+            android:id="@+id/button_complete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#0CAFFF"
+            android:text="가입 완료"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_marketing_agree" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

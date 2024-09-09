@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.AgreeToTermsOfUse" parent="Base.Theme.AgreeToTermsOfUse" />
+
+    <style name="CustomCheckbox" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:background">@drawable/checkbox_selector</item>
+    </style>
 </resources>
