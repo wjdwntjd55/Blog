@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="agreementViewModel"
+            type="com.project.agreetotermsofuse.AgreementViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:padding="20dp">
 
         <ImageView
             android:id="@+id/imageView_drag"
@@ -53,7 +56,9 @@
             <CheckBox
                 style="@style/CustomCheckbox"
                 android:layout_width="24dp"
-                android:layout_height="24dp" />
+                android:layout_height="24dp"
+                android:checked="@{agreementViewModel.allAgreeList.get(0)}"
+                android:onClick="@{() -> agreementViewModel.updateAllAgree(!agreementViewModel.allAgreeList.get(0))}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,7 +93,9 @@
             <CheckBox
                 style="@style/CustomCheckbox"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:checked="@{agreementViewModel.allAgreeList.get(1)}"
+                android:onClick="@{() -> agreementViewModel.updateAgreeState(1, !agreementViewModel.allAgreeList.get(1))}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,7 +119,9 @@
             <CheckBox
                 style="@style/CustomCheckbox"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:checked="@{agreementViewModel.allAgreeList.get(2)}"
+                android:onClick="@{() -> agreementViewModel.updateAgreeState(2, !agreementViewModel.allAgreeList.get(2))}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,7 +145,9 @@
             <CheckBox
                 style="@style/CustomCheckbox"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:checked="@{agreementViewModel.allAgreeList.get(3)}"
+                android:onClick="@{() -> agreementViewModel.updateAgreeState(3, !agreementViewModel.allAgreeList.get(3))}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -160,7 +171,9 @@
             <CheckBox
                 style="@style/CustomCheckbox"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:checked="@{agreementViewModel.allAgreeList.get(4)}"
+                android:onClick="@{() -> agreementViewModel.updateAgreeState(4, !agreementViewModel.allAgreeList.get(4))}" />
 
             <TextView
                 android:layout_width="wrap_content"
