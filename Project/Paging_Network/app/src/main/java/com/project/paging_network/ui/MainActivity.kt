@@ -30,7 +30,9 @@ class MainActivity : AppCompatActivity() {
         val mainAdapter = MainAdapter()
 
         binding.recyclerViewMain.apply {
-            adapter = mainAdapter
+            adapter = mainAdapter.withLoadStateFooter(
+                footer = MyLoadStateAdapter()
+            )
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
 
