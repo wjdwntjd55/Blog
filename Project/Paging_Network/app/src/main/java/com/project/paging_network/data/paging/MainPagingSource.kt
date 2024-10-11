@@ -36,6 +36,6 @@ class MainPagingSource(private val gitApiService: GitApiService) : PagingSource<
     }
 
     override fun getRefreshKey(state: PagingState<Int, GithubResponseItem>): Int? {
-        TODO("Not yet implemented")
+        return null
     }
 }
